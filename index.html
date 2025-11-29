@@ -30,6 +30,29 @@
             <div id="result"></div>
         </div>
     </div>
+    <!-- Live Ticker & News Panel -->
+<section class="panel">
+  <div class="ticker-row">
+    <div id="tickerList" class="ticker-list">Loading live stocks...</div>
+    <div class="ticker-controls">
+      <input id="watchInput" placeholder="Add ticker (e.g. AAPL)" />
+      <button id="addTickerBtn">Add</button>
+    </div>
+  </div>
+
+  <div class="panels">
+    <div class="panel-card">
+      <h3>Top Movers</h3>
+      <ul id="topMovers"></ul>
+    </div>
+
+    <div class="panel-card">
+      <h3>High-Impact News</h3>
+      <div id="newsFeed">Loading news...</div>
+    </div>
+  </div>
+</section>
+
 
     <script src="script.js"></script>
 </body>
