@@ -1,86 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Trader Dash • Real Market Dashboard</title>
-
-  <!-- Lightweight Charts for candlesticks -->
-  <script src="https://unpkg.com/lightweight-charts/dist/lightweight-charts.standalone.production.js"></script>
-
-  <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trader Dash</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <!-- Top ticker -->
-  <div id="topTicker" class="top-ticker">Loading market tickers...</div>
 
-  <div class="wrap">
-    <header class="header">
-      <h1>Trader Dash</h1>
-      <p class="muted">Real-time prices · News · Charts · Indicators · Fundamentals</p>
-      <div class="search-row">
-        <input id="symbolInput" placeholder="Ticker (e.g. AAPL or BINANCE:BTCUSDT)" />
-        <select id="resolutionSelect">
-          <option value="1">1m</option>
-          <option value="5">5m</option>
-          <option value="15">15m</option>
-          <option value="60">1h</option>
-          <option value="D" selected>1D</option>
-        </select>
-        <button id="loadBtn">Load</button>
-        <button id="watchBtn">+ Watch</button>
-      </div>
-    </header>
+<div id="liveTicker" class="ticker">Loading market tickers...</div>
 
-    <main class="main-grid">
-      <!-- Left column: chart + indicators -->
-      <section class="card large">
-        <div class="card-header">
-          <h2 id="chartTitle">Chart</h2>
-          <div class="small-controls">
-            <button id="smaBtn">SMA</button>
-            <button id="emaBtn">EMA</button>
-            <button id="rsiBtn">RSI</button>
-            <button id="macdBtn">MACD</button>
-          </div>
-        </div>
-        <div id="chart" class="chart"></div>
-        <div id="indicators" class="indicators"></div>
-      </section>
+<div class="container">
+    <h1 class="title">Trader Dash</h1>
+    <p class="subtitle">Real-time prices • News • Charts • Indicators • Fundamentals</p>
 
-      <!-- Right column: info -->
-      <aside class="card">
-        <h3 id="quoteTitle">Quote</h3>
-        <div id="quoteBox" class="meta-block">Loading...</div>
+    <input type="text" id="symbolInput" placeholder="AAPL">
+    <button id="loadBtn">Load</button>
 
-        <h3>Recommendation</h3>
-        <div id="recBox" class="rec-box">—</div>
+    <h2 id="chartTitle">Chart</h2>
+    <div id="chart"></div>
 
-        <h3>Fundamentals</h3>
-        <div id="fundamentals" class="meta-block">Loading...</div>
+    <h2>Quote</h2>
+    <div id="quoteBox">Loading...</div>
 
-        <h3>Upcoming Earnings</h3>
-        <div id="earnings" class="meta-block">Loading...</div>
-      </aside>
+    <h2>News</h2>
+    <div id="newsFeed">Loading...</div>
+</div>
 
-      <!-- Bottom row: news, movers, watchlist -->
-      <section class="card">
-        <h3>Market News</h3>
-        <div id="newsFeed" class="news-list">Loading news...</div>
-      </section>
-
-      <section class="card">
-        <h3>Top Movers (sample basket)</h3>
-        <div id="movers" class="movers-list">Loading movers...</div>
-
-        <h3 style="margin-top:14px">Watchlist</h3>
-        <div id="watchlist" class="movers-list">No watched tickers</div>
-      </section>
-    </main>
-  </div>
-
-  <footer class="footer">Built with Finnhub • Key in <code>script.js</code></footer>
-
-  <script src="script.js"></script>
+<script src="https://unpkg.com/lightweight-charts/dist/lightweight-charts.standalone.production.js"></script>
+<script src="script.js"></script>
 </body>
 </html>
