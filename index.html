@@ -3,14 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Buy • Hold • Sell Predictor</title>
+    <title>Finance Analyzer • Buy Hold Sell</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
+    <!-- 🔥 LIVE STOCK TICKER -->
+    <div class="ticker-wrap">
+        <div class="ticker">
+            <div class="ticker__item">AAPL ↑ 1.24%</div>
+            <div class="ticker__item">TSLA ↓ 0.88%</div>
+            <div class="ticker__item">NVDA ↑ 3.41%</div>
+            <div class="ticker__item">MSFT ↑ 0.52%</div>
+            <div class="ticker__item">META ↑ 2.01%</div>
+            <div class="ticker__item">AMD ↓ 1.12%</div>
+            <div class="ticker__item">QQQ ↑ 0.74%</div>
+            <div class="ticker__item">SPY ↑ 0.21%</div>
+        </div>
+    </div>
+
+    <!-- 🔥 HIGH IMPACT NEWS BAR -->
+    <div id="newsBar">Loading high-impact market news...</div>
+
     <div class="container">
         <h1 class="title">Buy • Hold • Sell Predictor</h1>
-        <p class="subtitle">Enter stock metrics and get an instant recommendation.</p>
+        <p class="subtitle">Fast trading insights based on smart rule-based analysis.</p>
 
         <div class="card">
             <label>Current Price</label>
@@ -30,31 +47,7 @@
             <div id="result"></div>
         </div>
     </div>
-    <!-- Live Ticker & News Panel -->
-<section class="panel">
-  <div class="ticker-row">
-    <div id="tickerList" class="ticker-list">Loading live stocks...</div>
-    <div class="ticker-controls">
-      <input id="watchInput" placeholder="Add ticker (e.g. AAPL)" />
-      <button id="addTickerBtn">Add</button>
-    </div>
-  </div>
-
-  <div class="panels">
-    <div class="panel-card">
-      <h3>Top Movers</h3>
-      <ul id="topMovers"></ul>
-    </div>
-
-    <div class="panel-card">
-      <h3>High-Impact News</h3>
-      <div id="newsFeed">Loading news...</div>
-    </div>
-  </div>
-</section>
-
 
     <script src="script.js"></script>
 </body>
 </html>
-
