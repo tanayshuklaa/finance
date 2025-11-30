@@ -3,51 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Finance Analyzer • Buy Hold Sell</title>
+    <title>Real-Time Buy • Hold • Sell Predictor</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <!-- 🔥 LIVE STOCK TICKER -->
-    <div class="ticker-wrap">
-        <div class="ticker">
-            <div class="ticker__item">AAPL ↑ 1.24%</div>
-            <div class="ticker__item">TSLA ↓ 0.88%</div>
-            <div class="ticker__item">NVDA ↑ 3.41%</div>
-            <div class="ticker__item">MSFT ↑ 0.52%</div>
-            <div class="ticker__item">META ↑ 2.01%</div>
-            <div class="ticker__item">AMD ↓ 1.12%</div>
-            <div class="ticker__item">QQQ ↑ 0.74%</div>
-            <div class="ticker__item">SPY ↑ 0.21%</div>
-        </div>
+<div class="ticker" id="liveTicker">Loading real market data...</div>
+
+<div class="container">
+    <h1 class="title">Buy • Hold • Sell Predictor</h1>
+    <p class="subtitle">Real-time stock analysis using live data + SMA logic.</p>
+
+    <div class="card">
+        <label>Stock Ticker</label>
+        <input type="text" id="symbol" placeholder="e.g. AAPL">
+
+        <button onclick="fetchStock()">Analyze</button>
+
+        <div id="result"></div>
     </div>
 
-    <!-- 🔥 HIGH IMPACT NEWS BAR -->
-    <div id="newsBar">Loading high-impact market news...</div>
+    <h2 class="section-title">📢 Market News (Real-Time)</h2>
+    <div id="newsFeed" class="news"></div>
 
-    <div class="container">
-        <h1 class="title">Buy • Hold • Sell Predictor</h1>
-        <p class="subtitle">Fast trading insights based on smart rule-based analysis.</p>
+</div>
 
-        <div class="card">
-            <label>Current Price</label>
-            <input type="number" id="currentPrice" placeholder="e.g. 150">
-
-            <label>52-Week High</label>
-            <input type="number" id="high52" placeholder="e.g. 190">
-
-            <label>52-Week Low</label>
-            <input type="number" id="low52" placeholder="e.g. 120">
-
-            <label>Past 5 Closing Prices (comma-separated, optional)</label>
-            <input type="text" id="pastPrices" placeholder="e.g. 150,148,152,149,151">
-
-            <button onclick="analyzeStock()">Analyze</button>
-
-            <div id="result"></div>
-        </div>
-    </div>
-
-    <script src="script.js"></script>
+<script src="script.js"></script>
 </body>
 </html>
