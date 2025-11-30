@@ -1,33 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trader Dash</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Trader Dash</title>
+  <link rel="stylesheet" href="style.css" />
+  <!-- Lightweight Charts for real candles -->
+  <script src="https://unpkg.com/lightweight-charts/dist/lightweight-charts.standalone.production.js"></script>
 </head>
 <body>
+  <div id="liveTicker" class="ticker">Loading market tickers...</div>
 
-<div id="liveTicker" class="ticker">Loading market tickers...</div>
-
-<div class="container">
+  <div class="container">
     <h1 class="title">Trader Dash</h1>
-    <p class="subtitle">Real-time prices • News • Charts • Indicators • Fundamentals</p>
+    <p class="subtitle">Real-time prices • News • Candles • Indicators</p>
 
-    <input type="text" id="symbolInput" placeholder="AAPL">
-    <button id="loadBtn">Load</button>
+    <div class="controls">
+      <input id="symbolInput" placeholder="AAPL" />
+      <select id="timeframe">
+        <option value="D" selected>1D</option>
+        <option value="60">1H</option>
+        <option value="15">15m</option>
+        <option value="5">5m</option>
+      </select>
+      <button id="loadBtn">Load</button>
+    </div>
 
     <h2 id="chartTitle">Chart</h2>
     <div id="chart"></div>
 
-    <h2>Quote</h2>
-    <div id="quoteBox">Loading...</div>
+    <div class="grid">
+      <div>
+        <h2>Quote</h2>
+        <div id="quoteBox" class="panel">Loading...</div>
 
-    <h2>News</h2>
-    <div id="newsFeed">Loading...</div>
-</div>
+        <h2>Indicators</h2>
+        <div id="indicatorBox" class="panel">Loading...</div>
+      </div>
 
-<script src="https://unpkg.com/lightweight-charts/dist/lightweight-charts.standalone.production.js"></script>
-<script src="script.js"></script>
+      <div>
+        <h2>News</h2>
+        <div id="newsFeed" class="panel">Loading...</div>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
 </body>
 </html>
