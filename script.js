@@ -4,7 +4,7 @@
    ========================= */
 
 // ---------- CONFIG ----------
-const API_KEY = "d4ma5m1r01qjidhuhs90d4ma5m1r01qjidhuhs9g"; // <-- your Finnhub key
+const API_KEY = "d4maeh1r01qjidhujfmgd4maeh1r01qjidhujfn0"; // <-- your Finnhub key
 const sampleSymbols = ["AAPL","TSLA","NVDA","AMZN","MSFT","GOOGL","META","NVDA","SPY","QQQ"];
 const cryptoSymbols = ["BINANCE:BTCUSDT","BINANCE:ETHUSDT"];
 const forexSymbols = ["OANDA:EUR_USD","OANDA:USD_JPY"];
