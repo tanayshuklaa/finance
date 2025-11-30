@@ -1,4 +1,4 @@
-const API_KEY = "YOUR_API_KEY";  // <-- PASTE YOUR FINNHUB KEY
+const API_KEY = "d4maeh1r01qjidhujfmgd4maeh1r01qjidhujfn0";  // <-- your real Finnhub ke
 
 // ----------------------------------
 // REAL-TIME MARKET TICKER
