@@ -1,3 +1,4 @@
+/* — BUY HOLD SELL ANALYZER — */
 function analyzeStock() {
     let current = parseFloat(document.getElementById("currentPrice").value);
     let high52 = parseFloat(document.getElementById("high52").value);
@@ -13,20 +14,17 @@ function analyzeStock() {
         return;
     }
 
-    // Basic Rule-Based Logic
-    if (current < low52 * 1.15) {
-        return showResult("BUY", "#0f7b32");
-    }
-    if (current > high52 * 0.95) {
-        return showResult("SELL", "#b81f1f");
-    }
+    // Rule #1: Low-based BUY
+    if (current < low52 * 1.15) return showResult("BUY", "#0f7b32");
 
-    // SMA Logic (Optional)
+    // Rule #2: High-based SELL
+    if (current > high52 * 0.95) return showResult("SELL", "#b81f1f");
+
+    // Rule #3: SMA-based logic
     if (past.length > 0) {
-        let numbers = past.split(",").map(n => parseFloat(n.trim()));
-        if (numbers.length > 1) {
-            let sma = numbers.reduce((a, b) => a + b, 0) / numbers.length;
-
+        let nums = past.split(",").map(v => parseFloat(v.trim()));
+        if (nums.length > 1) {
+            let sma = nums.reduce((a, b) => a + b, 0) / nums.length;
             if (current < sma) return showResult("BUY", "#0f7b32");
             if (current > sma) return showResult("SELL", "#b81f1f");
         }
@@ -39,3 +37,25 @@ function analyzeStock() {
         resultBox.style.background = color;
     }
 }
+
+/* — HIGH IMPACT NEWS ROTATOR — */
+const newsHeadlines = [
+    "BREAKING: Tech stocks surge after strong earnings.",
+    "FED ALERT: New rate policy update expected tomorrow.",
+    "Market volatility rises as traders await CPI numbers.",
+    "Oil prices spike amid global supply disruptions.",
+    "Crypto markets rally: BTC crosses key resistance.",
+    "Semiconductors soar on renewed AI demand.",
+    "Investors rotate into defensive sectors.",
+];
+
+let newsIndex = 0;
+
+function rotateNews() {
+    const bar = document.getElementById("newsBar");
+    bar.innerHTML = newsHeadlines[newsIndex];
+    newsIndex = (newsIndex + 1) % newsHeadlines.length;
+}
+
+rotateNews();
+setInterval(rotateNews, 3500);
