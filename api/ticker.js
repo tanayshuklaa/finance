@@ -1,21 +1,22 @@
 export default async function handler(req, res) {
-    const key = process.env.FINNHUB_KEY;
-    const symbols = ["AAPL", "TSLA", "NVDA", "AMZN", "SPY"];
+  res.setHeader("Cache-Control", "s-maxage=20, stale-while-revalidate=40");
 
-    try {
-        const quotes = await Promise.all(
-            symbols.map(async symbol => {
-                const url = `https://finnhub.io/api/v1/quote?symbol=${symbol}&token=${key}`;
-                const response = await fetch(url);
-                const data = await response.json();
-                return { symbol, ...data };
-            })
-        );
+  const key = process.env.FINNHUB_KEY;
+  const symbols = ["AAPL", "TSLA", "NVDA", "AMZN", "SPY"];
 
-        res.status(200).json(quotes);
-    } catch (err) {
-        res.status(500).json({ error: "Ticker fetch failed" });
-    }
+  try {
+    const responses = await Promise.all(
+      symbols.map(async (symbol) => {
+        const url = `https://finnhub.io/api/v1/quote?symbol=${symbol}&token=${key}`;
+        const r = await fetch(url);
+        const d = await r.json();
+        return { symbol, ...d };
+      })
+    );
+
+    return res.status(200).json(responses);
+  } catch (err) {
+    console.error("ticker error:", err);
+    return res.status(500).json({ error: "Ticker fetch failed" });
+  }
 }
-
-
