@@ -75,25 +75,5 @@ button:hover {
     border-radius: 12px;
     display: none;
 }
-.panel {
-  margin-top: 30px;
-  color: #e6eef8;
-}
-.ticker-row { display:flex; gap:12px; align-items:center; justify-content:space-between; }
-.ticker-list {
-  flex:1;
-  padding:10px;
-  border-radius:10px;
-  background:linear-gradient(90deg, rgba(10,15,31,0.6), rgba(20,30,50,0.6));
-  overflow:hidden;
-  white-space:nowrap;
-}
-.ticker-item { display:inline-block; padding:6px 12px; margin-right:10px; border-radius:8px; background: rgba(255,255,255,0.03); }
-.ticker-controls { width:260px; display:flex; gap:8px; }
-.panels { display:flex; gap:16px; margin-top:14px; }
-.panel-card { flex:1; padding:14px; background:#0f1726; border-radius:12px; min-height:140px; }
-#topMovers li { margin-bottom:8px; list-style:none; }
-#newsFeed .news-item { margin-bottom:12px; padding-bottom:8px; border-bottom:1px dashed rgba(255,255,255,0.03); }
-.news-item a { color:#9ed8ff; text-decoration:none; }
 
 
