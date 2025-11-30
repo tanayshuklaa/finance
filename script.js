@@ -1,61 +1,91 @@
-/* — BUY HOLD SELL ANALYZER — */
-function analyzeStock() {
-    let current = parseFloat(document.getElementById("currentPrice").value);
-    let high52 = parseFloat(document.getElementById("high52").value);
-    let low52 = parseFloat(document.getElementById("low52").value);
-    let past = document.getElementById("pastPrices").value;
+const API_KEY = "d4ma5m1r01qjidhuhs90d4ma5m1r01qjidhuhs9g";  // <-- your real Finnhub key
 
-    let resultBox = document.getElementById("result");
-    resultBox.style.display = "block";
+// ----------------------------------
+// REAL-TIME MARKET TICKER
+// ----------------------------------
+async function loadTicker() {
+    const symbols = ["AAPL", "TSLA", "NVDA", "AMZN", "SPY"];
 
-    if (!current || !high52 || !low52) {
-        resultBox.innerHTML = "❗ Please fill in all required fields.";
-        resultBox.style.background = "#3a1a1a";
+    let text = "";
+    for (let s of symbols) {
+        let url = `https://finnhub.io/api/v1/quote?symbol=${s}&token=${API_KEY}`;
+        let data = await fetch(url).then(r => r.json());
+
+        let change = ((data.c - data.pc) / data.pc * 100).toFixed(2);
+        let arrow = change >= 0 ? "▲" : "▼";
+        let color = change >= 0 ? "#4caf50" : "#ff5252";
+
+        text += `<span style="color:${color}; margin-right:22px;">
+                    ${s}: ${data.c} ${arrow} ${change}%
+                 </span>`;
+    }
+    document.getElementById("liveTicker").innerHTML = text;
+}
+loadTicker();
+setInterval(loadTicker, 15000); // update every 15 sec
+
+
+// ----------------------------------
+// BUY • HOLD • SELL ANALYZER
+// ----------------------------------
+async function fetchStock() {
+    let symbol = document.getElementById("symbol").value.toUpperCase();
+    let result = document.getElementById("result");
+
+    if (!symbol) {
+        result.innerHTML = "Enter a valid stock symbol.";
         return;
     }
 
-    // Rule #1: Low-based BUY
-    if (current < low52 * 1.15) return showResult("BUY", "#0f7b32");
+    // Fetch real price data
+    let quote = await fetch(
+        `https://finnhub.io/api/v1/quote?symbol=${symbol}&token=${API_KEY}`
+    ).then(r => r.json());
 
-    // Rule #2: High-based SELL
-    if (current > high52 * 0.95) return showResult("SELL", "#b81f1f");
-
-    // Rule #3: SMA-based logic
-    if (past.length > 0) {
-        let nums = past.split(",").map(v => parseFloat(v.trim()));
-        if (nums.length > 1) {
-            let sma = nums.reduce((a, b) => a + b, 0) / nums.length;
-            if (current < sma) return showResult("BUY", "#0f7b32");
-            if (current > sma) return showResult("SELL", "#b81f1f");
-        }
+    if (!quote.c) {
+        result.innerHTML = "Invalid stock ticker.";
+        return;
     }
 
-    return showResult("HOLD", "#c4a000");
+    let current = quote.c;
+    let high52 = quote.h;
+    let low52 = quote.l;
 
-    function showResult(text, color) {
-        resultBox.innerHTML = text;
-        resultBox.style.background = color;
+    // Decision logic
+    if (current < low52 * 1.15) show("BUY", "#0f7b32");
+    else if (current > high52 * 0.95) show("SELL", "#b81f1f");
+    else show("HOLD", "#c4a000");
+
+    function show(text, color) {
+        result.innerHTML = `
+            <strong style="color:${color}; font-size:2rem;">${text}</strong><br><br>
+            Current: $${current}<br>
+            52w High: $${high52}<br>
+            52w Low: $${low52}
+        `;
     }
 }
 
-/* — HIGH IMPACT NEWS ROTATOR — */
-const newsHeadlines = [
-    "BREAKING: Tech stocks surge after strong earnings.",
-    "FED ALERT: New rate policy update expected tomorrow.",
-    "Market volatility rises as traders await CPI numbers.",
-    "Oil prices spike amid global supply disruptions.",
-    "Crypto markets rally: BTC crosses key resistance.",
-    "Semiconductors soar on renewed AI demand.",
-    "Investors rotate into defensive sectors.",
-];
 
-let newsIndex = 0;
+// ----------------------------------
+// REAL MARKET NEWS
+// ----------------------------------
+async function loadNews() {
+    const url = `https://finnhub.io/api/v1/news?category=general&token=${API_KEY}`;
 
-function rotateNews() {
-    const bar = document.getElementById("newsBar");
-    bar.innerHTML = newsHeadlines[newsIndex];
-    newsIndex = (newsIndex + 1) % newsHeadlines.length;
+    let data = await fetch(url).then(r => r.json());
+    let list = document.getElementById("newsFeed");
+
+    list.innerHTML = ""; // Clear old news
+
+    data.slice(0, 8).forEach(n => {
+        list.innerHTML += `
+            <div class="newsItem">
+                <strong>${n.headline}</strong><br>
+                <span style="font-size:0.9rem;">${n.source}</span>
+            </div>
+        `;
+    });
 }
-
-rotateNews();
-setInterval(rotateNews, 3500);
+loadNews();
+setInterval(loadNews, 60000); // refresh every minute
